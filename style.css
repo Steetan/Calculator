@@ -1,0 +1,77 @@
+body {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px 0;
+}
+
+
+.calculator {
+    background-color: #fff;
+    border: 2px solid rgb(245,139,255);
+    padding: 10px;
+    border-radius: 3px;
+    max-width: 134px;
+}
+
+.calculator__print {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0 5px;
+    overflow: auto;
+    font-size: 12px;
+    height: 30px;
+    max-width: 100%;
+    background-color: #fff;
+    border: 1px solid rgb(245,139,255);
+    background: linear-gradient(135deg, rgba(255,239,250,1) 50%, rgba(255,255,255,1) 57%, rgba(253,240,255,1) 64%);
+}
+
+.calculator__btn {
+    border: 1px solid rgb(245,139,255);
+    background: linear-gradient(0deg, rgba(255,217,254,1) 0%, rgba(255,255,255,1) 100%);
+    cursor: pointer;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.calculator__input {
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+
+}
+
+.btn--big {
+    grid-column-end: span 2;
+
+}
+
+.title {
+    animation-name: title;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+
+.title__img {
+    width: 270px;
+    user-select: none;
+}
+
+@keyframes title {
+    0% {
+    }
+    100% {
+        transform: translateY(10px);
+    }
+}
