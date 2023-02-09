@@ -31,10 +31,18 @@ calcBtn.forEach(function(ev) {
                     calcPrint.textContent = num1 - num2;
                     break;
                 case '*':
-                    calcPrint.textContent = (num1 * num2).toFixed(5);
+                    if ((num1 * num2)%1 !== 0) {
+                        calcPrint.textContent = (num1 * num2).toFixed(4);
+                    } else if ((num1 * num2)%1 == 0) {
+                        calcPrint.textContent = num1 * num2;
+                    }
                     break;
                 case '/':
-                    calcPrint.textContent = (num1 / num2).toFixed(5);
+                    if ((num1 / num2)%1 !== 0) {
+                        calcPrint.textContent = (num1 / num2).toFixed(4);
+                    } else if ((num1 / num2)%1 == 0) {
+                        calcPrint.textContent = num1 / num2;
+                    }
                     break;
                 default:
                     calcPrint.textContent = 0;
