@@ -1,12 +1,11 @@
 const calcPrint = document.querySelector(".calculator__print")
+const calcBtn = document.querySelectorAll(".calculator__btn")
 const action2 = document.querySelector(".action-2")
 const action3 = document.querySelector(".action-3")
 const action4 = document.querySelector(".action-4")
-const calcBtn = document.querySelectorAll(".calculator__btn")
 let num1
 let num2
 let action
-
 
 calcBtn.forEach(function(ev) {
     ev.addEventListener("click", function() {
