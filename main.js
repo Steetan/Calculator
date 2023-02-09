@@ -31,10 +31,10 @@ calcBtn.forEach(function(ev) {
                     calcPrint.textContent = num1 - num2;
                     break;
                 case '*':
-                    calcPrint.textContent = num1 * num2;
+                    calcPrint.textContent = (num1 * num2).toFixed(5);
                     break;
                 case '/':
-                    calcPrint.textContent = num1 / num2;
+                    calcPrint.textContent = (num1 / num2).toFixed(5);
                     break;
                 default:
                     calcPrint.textContent = 0;
@@ -47,9 +47,9 @@ calcBtn.forEach(function(ev) {
         if (ev.classList.contains("action-4")) {
             calcPrint.textContent = calcPrint.textContent.slice(0, -1)
         }
-        if (calcPrint.textContent.length > 14) {
-            calcPrint.textContent = ""
-        }
+        // if (calcPrint.textContent.length > 14) {
+        //     calcPrint.textContent = ""
+        // }
     })
 })
 
