@@ -11,9 +11,19 @@ body {
     gap: 15px 0;
 }
 
+.wrapper {
+    position: relative;
+}
+
+img {
+    user-select: none;
+    display: block;
+}
+
 .calculator {
     background-color: #fff;
     border: 2px solid rgb(245,139,255);
+    box-shadow: 2px 2px 39px -1px rgba(0, 0, 0, 0.45);
     padding: 10px;
     border-radius: 3px;
     max-width: 134px;
@@ -26,7 +36,7 @@ body {
     padding: 0 5px;
     overflow: auto;
     font-size: 12px;
-    height: 30px;
+    height: 40px;
     max-width: 100%;
     border: 1px solid rgb(245,139,255);
     background: linear-gradient(135deg, rgba(255,239,250,1) 50%, rgba(255,255,255,1) 57%, rgba(253,240,255,1) 64%);
@@ -66,10 +76,76 @@ body {
     user-select: none;
 }
 
+.eye__block {
+    position: absolute;
+    z-index: -1;
+    transition: 1s ease;
+    animation-name: eye;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+
+.eye__img {
+    opacity: .5;
+    max-width: 100px;
+}
+
+.action-7 {
+    position: relative;
+}
+
+.action-7 span{
+    position: absolute;
+    top: 15%;
+    font-size: 5px;
+}
+
 @keyframes title {
     0% {
     }
     100% {
         transform: translateY(10px);
     }
+}
+
+@keyframes desc {
+    0% {
+    }
+    100% {
+        transform: translateY(3px);
+    }
+}
+
+@keyframes eye {
+    0% {
+    }
+    100% {
+        transform: translateY(5px);
+    }
+}
+
+.desc__img{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 150px;
+    animation-name: desc;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+
+.text__img {
+    position: absolute;
+    top: 100%;
+    left: calc(50% - 75px);
+    width: 150px;
+    animation-name: desc;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
 }
