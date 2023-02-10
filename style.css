@@ -11,6 +11,18 @@ body {
     gap: 15px 0;
 }
 
+*::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+  *::-webkit-scrollbar-track {
+    background: none;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #de80e0;
+    border-radius: 5px;
+  }
+
 .wrapper {
     position: relative;
 }
