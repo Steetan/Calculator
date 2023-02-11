@@ -6,8 +6,8 @@ const block = document.querySelector(".eye__block")
 const img = document.querySelectorAll("img")
 calcPrint.textContent = ""
 let print
-let num1
-let num2
+let num1 = "";
+let num2 = "";
 let action
 
 img.forEach(function(event) {
@@ -42,7 +42,7 @@ calcBtn.forEach(function(ev) {
             && (calcPrint.textContent.slice(-1) === action)) {
             num1 = parseFloat(calcPrint.textContent.substring(0, calcPrint.textContent.length - 1));
             calcPrint.textContent = ""
-        } 
+        }
         if(ev.classList.contains("action-2")) {
             num2 = parseFloat(calcPrint.textContent.replace("=", ""))
             calcPrint.textContent = ""
@@ -79,14 +79,13 @@ calcBtn.forEach(function(ev) {
             }
             calcPrint.textContent = calcPrint.textContent.slice(0, -1)
         }
-        if (ev.classList.contains("action-5")
-        || ev.classList.contains("action-7")
-        || ev.classList.contains("action-8")
-       ) {
-            num1 = parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""))
-        }
         if (ev.classList.contains("action-5")) {
-            calcPrint.textContent = Math.sqrt(num1)
+            if (num1 !== "" && num2 == "") {
+                num1 = parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""))
+                calcPrint.textContent = Math.sqrt(num1)
+            }
+            num2 = parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""))
+            calcPrint.textContent = Math.sqrt(num2)
         }
         if (ev.classList.contains("action-6")) {
             if(calcPrint.textContent[0] !== "-") {
@@ -97,16 +96,25 @@ calcBtn.forEach(function(ev) {
             }
         }
         if (ev.classList.contains("action-7")) {
-            calcPrint.textContent = (num1 * num1)
+            if (num1 !== "" && num2 == "") {
+                num1 = parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""))
+                calcPrint.textContent = (num1 * num1)
+            }
+            num2 = parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""))
+            calcPrint.textContent = (num2 * num2)
         }
         if (ev.classList.contains("action-8")) {
-            calcPrint.textContent = (1 / num1)
+            if (num1 !== "" && num2 == "") {
+                num1 = parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""))
+                calcPrint.textContent = (1 / num1)
+            }
+            num2 = parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""))
+            calcPrint.textContent = (1 / num2)
         }
         if (ev.classList.contains("action-9")) {
             num2 = parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""))
             calcPrint.textContent = ((100 * num2) / num1)
         }
-        console.log(num1, num2)
     })
 })
 
