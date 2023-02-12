@@ -103,7 +103,6 @@ img {
     opacity: .5;
     max-width: 100px;
 }
-
 .action-7 {
     position: relative;
 }
@@ -112,6 +111,18 @@ img {
     position: absolute;
     top: 15%;
     font-size: 5px;
+}
+
+.action-8 {
+    display: flex;
+}
+
+.action-8 span {
+    font-size: 9px;
+}
+
+.action-8 span:last-child {
+    align-self: flex-end;
 }
 
 @keyframes title {
