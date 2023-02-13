@@ -120,6 +120,11 @@ img {
     cursor: pointer;
     border-radius: 5px;
     user-select: none;
+    transition: .1 linear;
+}
+
+.calculator__btn:hover {
+    opacity: .8;
 }
 
 .calculator__input {
