@@ -4,6 +4,8 @@ const action2 = document.querySelector(".action-2");
 const action3 = document.querySelector(".action-3");
 const block = document.querySelector(".eye__block");
 const img = document.querySelectorAll("img");
+const calculator = document.querySelector(".calculator")
+const loading = document.querySelector(".loading")
 let print;
 let num1 = "";
 let num2 = "";
@@ -169,6 +171,16 @@ calcBtn.forEach(function (ev) {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function(ev) {
+    loading.classList.add("active")
+    setTimeout(() => {
+        loading.style.display = "none"
+    }, 500);
+    setTimeout(() => {
+        calculator.classList.add("blick")
+    }, 300);
+})
 
 setInterval(() => {
     randomNum = Math.floor(Math.random() * (window.innerWidth - 100));
