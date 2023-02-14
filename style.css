@@ -1,3 +1,9 @@
+html,
+body {
+    scrollbar-width: thin;
+    scrollbar-color: #de80e0 #fff;
+}
+
 body {
     font-family: sans-serif;
     padding: 0;
@@ -33,7 +39,7 @@ body {
     background-size: cover;
     top: calc(50% - 40px);
     left: calc(50% - 40px);
-    z-index: 1;
+    z-index: 2;
 }
 
 .loading.active.active2::before {
@@ -91,6 +97,7 @@ img {
     transform: rotate(50deg);
     z-index: 2;
     opacity: .8;
+    user-select: none;
 }
 
 
@@ -217,11 +224,9 @@ img {
     }
 }
 
-.desc__img{
+.desc__img,
+.text__img {
     position: absolute;
-    top: 0;
-    left: 100%;
-    width: 150px;
     animation-name: desc;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
@@ -229,14 +234,14 @@ img {
     animation-direction: alternate-reverse;
 }
 
+.desc__img {
+    top: 0;
+    left: 100%;
+    width: 150px;
+}
+
 .text__img {
-    position: absolute;
     top: 100%;
     left: calc(50% - 75px);
     width: 150px;
-    animation-name: desc;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse;
 }

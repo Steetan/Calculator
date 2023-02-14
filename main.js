@@ -4,14 +4,16 @@ const action2 = document.querySelector(".action-2");
 const action3 = document.querySelector(".action-3");
 const block = document.querySelector(".eye__block");
 const img = document.querySelectorAll("img");
-const calculator = document.querySelector(".calculator")
-const loading = document.querySelector(".loading")
+const calculator = document.querySelector(".calculator");
+const loading = document.querySelector(".loading");
 let print;
 let num1 = "";
 let num2 = "";
 let action;
+let result = "";
+let num22;
 
-calcPrint.textContent = ""
+calcPrint.textContent = "";
 
 img.forEach(function (event) {
     event.addEventListener("dragstart", function (e) {
@@ -63,30 +65,38 @@ calcBtn.forEach(function (ev) {
                     calcPrint.textContent = num1 + num2;
                     break;
                 case "-":
-                    calcPrint.textContent = num1 - num2;
+                    if (result === "") {
+                        calcPrint.textContent = num1 - num2;
+                        num22 = num2;
+                        result = num1 - num2;
+                    } else if (result !== "") {
+                        calcPrint.textContent = result -= num22;
+                    }
                     break;
                 case "*":
                     calcPrint.textContent = num1 * num2;
                     break;
                 case "/":
-                    calcPrint.textContent = num1 / num2;
-                    if (num2 == "") {
-                        calcPrint.textContent = "Error!";
+                    if (result === "") {
+                        calcPrint.textContent = num1 / num2;
+                        num22 = num2;
+                        result = num1 / num2;
+                    } else if (result !== "") {
+                        calcPrint.textContent = result /= num22;
                     }
-                    break;
-                default:
-                    calcPrint.textContent = 0;
+                    if (num2 == "0") {
+                        calcPrint.textContent = "The divisor cannot be zero";
+                    }
                     break;
             }
 
             //if calcPrint = NaN
-            if (num2 == "" || calcPrint.textContent == "NaN") {
-                calcPrint.textContent = num1
+            if (calcPrint.textContent == "NaN") {
+                calcPrint.textContent = num1;
             }
-            if (num1 == "" || calcPrint.textContent == "NaN") {
-                calcPrint.textContent = num2
+            if (num1 == "") {
+                calcPrint.textContent = num2;
             }
-            
         }
 
         //action C
@@ -94,13 +104,15 @@ calcBtn.forEach(function (ev) {
             calcPrint.textContent = "";
             num1 = "";
             num2 = "";
+            result = "";
         }
 
         //NaN and Infinity
         if (ev.classList.contains("action-4")) {
             if (
                 calcPrint.textContent == "NaN" ||
-                calcPrint.textContent == "Infinity"
+                calcPrint.textContent == "Infinity" ||
+                calcPrint.textContent == "The divisor cannot be zero"
             ) {
                 calcPrint.textContent = "";
             }
@@ -114,6 +126,7 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent.replace(`${ev.textContent}`, "")
             );
             calcPrint.textContent = Math.sqrt(num2);
+            printNaN();
         }
 
         // action +/-
@@ -132,6 +145,7 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent.replace(`${ev.textContent}`, "")
             );
             calcPrint.textContent = num2 * num2;
+            printNaN();
         }
 
         // action 1/x
@@ -141,6 +155,13 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent.replace(`${ev.textContent}`, "")
             );
             calcPrint.textContent = 1 / num2;
+            printNaN();
+            if (
+                calcPrint.textContent == "Infinity" ||
+                calcPrint.textContent == "0"
+            ) {
+                calcPrint.textContent = "The divisor cannot be zero";
+            }
         }
 
         // action %
@@ -148,7 +169,11 @@ calcBtn.forEach(function (ev) {
             num2 = parseFloat(
                 calcPrint.textContent.replace(`${ev.textContent}`, "")
             );
-            calcPrint.textContent = (100 * num2) / num1;
+            calcPrint.textContent = (num2 * num1) / 100;
+            if (calcPrint.textContent === "NaN") {
+                calcPrint.textContent = num1 / 100;
+            }
+            printNaN();
         }
 
         // action CE
@@ -160,7 +185,6 @@ calcBtn.forEach(function (ev) {
         if (calcPrint.textContent.split(".").length - 1 > 1) {
             calcPrint.textContent = calcPrint.textContent.slice(0, -1);
         }
-
         function actionNum(num) {
             if (num1 !== "" && num2 == "") {
                 num1 = parseFloat(
@@ -169,21 +193,27 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent = num;
             }
         }
+
+        function printNaN() {
+            if (calcPrint.textContent === "NaN") {
+                calcPrint.textContent = 0;
+            }
+        }
     });
 });
 
-document.addEventListener("DOMContentLoaded", function(ev) {
-    loading.classList.add("active")
+document.addEventListener("DOMContentLoaded", function (ev) {
+    loading.classList.add("active");
     setTimeout(() => {
-        loading.classList.add("active2")
-    }, 200)
+        loading.classList.add("active2");
+    }, 200);
     setTimeout(() => {
-        loading.outerHTML = ""
+        loading.outerHTML = "";
     }, 500);
     setTimeout(() => {
-        calculator.classList.add("blick")
+        calculator.classList.add("blick");
     }, 300);
-})
+});
 
 setInterval(() => {
     randomNum = Math.floor(Math.random() * (window.innerWidth - 100));
