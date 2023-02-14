@@ -175,7 +175,10 @@ calcBtn.forEach(function (ev) {
 document.addEventListener("DOMContentLoaded", function(ev) {
     loading.classList.add("active")
     setTimeout(() => {
-        loading.style.display = "none"
+        loading.classList.add("active2")
+    }, 200)
+    setTimeout(() => {
+        loading.outerHTML = ""
     }, 500);
     setTimeout(() => {
         calculator.classList.add("blick")

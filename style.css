@@ -25,7 +25,7 @@ body {
 
 .loading::before {
     content: "";
-    display: block;
+    opacity: 0;
     width: 80px;
     height: 80px;
     position: absolute;
@@ -36,7 +36,11 @@ body {
     z-index: 1;
 }
 
-.loading.active::before,
+.loading.active.active2::before {
+    opacity: 1;
+}
+
+.loading.active2::before,
 .loading.active {
     transition: .2s linear;
     opacity: 0;
