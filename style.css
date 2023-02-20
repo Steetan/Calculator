@@ -174,9 +174,14 @@ img {
     animation-direction: alternate-reverse;
 }
 
+.eye__img.eye--off {
+    opacity: 0;
+}
+
 .eye__img {
     opacity: .5;
     max-width: 100px;
+    animation: eye2 1s linear;
 }
 .action-7 {
     position: relative;
@@ -221,6 +226,15 @@ img {
     }
     100% {
         transform: translateY(5px);
+    }
+}
+
+@keyframes eye2 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.5;
     }
 }
 
