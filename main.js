@@ -1,4 +1,5 @@
 const calcPrint = document.querySelector(".calculator__print");
+const calcPrintMini = document.querySelector(".calculator__print-mini");
 const calcBtn = document.querySelectorAll(".calculator__btn");
 const action2 = document.querySelector(".action-2");
 const action3 = document.querySelector(".action-3");
@@ -11,7 +12,9 @@ let print;
 let num1 = "";
 let num2 = "";
 let num3 = ""
-let action;
+let action = "";
+let numPrint
+let num2Print
 
 calcPrint.textContent = "";
 
@@ -35,6 +38,7 @@ calcBtn.forEach(function (ev) {
         if (!ev.classList.contains("action-4") &&
             !ev.classList.contains("action-6")) {
             calcPrint.textContent += print;
+            calcPrintMini.textContent += print;
         }
         if (ev.classList.contains("action")) {
             if (calcPrint.textContent.length > 1) {
@@ -43,9 +47,9 @@ calcBtn.forEach(function (ev) {
         }
         if (calcPrint.textContent.length > 1 &&
             calcPrint.textContent.slice(-1) === action) {
-            num1 = parseFloat(calcPrint.textContent
-                .substring(0, calcPrint.textContent.length - 1));
-
+                num1 = parseFloat(calcPrint.textContent
+                    .substring(0, calcPrint.textContent.length - 1));
+                    
             calcPrint.textContent = "";
         }
 
@@ -109,6 +113,7 @@ calcBtn.forEach(function (ev) {
         //action C
         if (ev.classList.contains("action-3")) {
             calcPrint.textContent = "";
+            calcPrintMini.textContent = "";
             num1 = "";
             num2 = "";
             result = "";
@@ -121,6 +126,9 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent == "The divisor cannot be zero") {
                 calcPrint.textContent = "";
             }
+            if (calcPrint.textContent != "") {
+                calcPrintMini.textContent = "";
+            }
             calcPrint.textContent = calcPrint.textContent.slice(0, -1);
         }
 
@@ -130,8 +138,17 @@ calcBtn.forEach(function (ev) {
                     .replace(`${ev.textContent}`, ""));
 
             calcPrint.textContent = Math.sqrt(num3);
-            if(calcPrint.textContent == "The divisor cannot be zero") {
-                calcPrint.textContent = 0
+
+            numPrint = ""
+            numPrint = calcPrintMini.textContent.replace(`${num3}`, `√(${num3})`)
+            if (numPrint.split("√").length - 1) {
+                numPrint = numPrint.slice(0, -1);
+            }
+            if (numPrint == `√(${num3})`) {
+                calcPrintMini.textContent = numPrint
+            } 
+            else if (numPrint !== `√(${num3})`) {
+                calcPrintMini.textContent = numPrint.replace(numPrint, `√(${numPrint})`)
             }
             printNaN();
         }
@@ -140,9 +157,23 @@ calcBtn.forEach(function (ev) {
         if (ev.classList.contains("action-6")) {
             if (calcPrint.textContent[0] !== "-") {
                 calcPrint.textContent = "-" + calcPrint.textContent;
+                if (num1 == "") {
+                    calcPrintMini.textContent = "-" + calcPrintMini.textContent;
+                } else if (num1 != "") {
+                    numPrint = calcPrint.textContent.replace("-", "")
+                    calcPrintMini.textContent = calcPrintMini.textContent
+                        .replace(numPrint, `-${numPrint}`)
+                }
             } 
             else if (calcPrint.textContent[0] === "-") {
                 calcPrint.textContent = calcPrint.textContent.slice(1);
+                if (num1 == "") {
+                    calcPrintMini.textContent = calcPrintMini.textContent.slice(1);
+                } else if (num1 != "") {
+                    numPrint = calcPrint.textContent.replace("-", "")
+                    calcPrintMini.textContent = calcPrintMini.textContent
+                        .replace(`-${numPrint}`, numPrint)
+                }
             }
         }
 
@@ -152,6 +183,18 @@ calcBtn.forEach(function (ev) {
                     .replace(`${ev.textContent}`, ""));
 
             calcPrint.textContent = num3 * num3
+
+            numPrint = ""
+            numPrint = calcPrintMini.textContent.replace(`${num3}`, `(${num3})^2`)
+            if (numPrint.split("x2").length - 1) {
+                numPrint = numPrint.slice(0, -2);
+            }
+            if (numPrint == `(${num3})^2`) {
+                calcPrintMini.textContent = numPrint
+            } 
+            else if (numPrint !== `(${num3})^2`) {
+                calcPrintMini.textContent = numPrint.replace(numPrint, `(${num3})^2`)
+            }
             printNaN(); 
         }
 
@@ -165,17 +208,40 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent == "0") {
                 calcPrint.textContent = "The divisor cannot be zero";
             }
+
+            num2Print = num3
+            console.log(num2Print)
+
+            numPrint = ""
+            numPrint = calcPrintMini.textContent.replace(`${num3}`, `1/(${num3})`)
+            if (numPrint.split("1/x").length - 1) {
+                numPrint = numPrint.slice(0, -2);
+            }
+            if (numPrint == `1/(${num3})`) {
+                calcPrintMini.textContent = numPrint
+            } 
+            else if (numPrint !== `1/(${num3})`) {
+                calcPrintMini.textContent = numPrint.replace(numPrint, `1/(${num3})`)
+            }   
+
             printNaN();
         }
 
         // action %
         if (ev.classList.contains("action-9")) {
-            num2 = 
-                parseFloat(calcPrint.textContent.replace(`${ev.textContent}`, ""));
+            num2 = parseFloat(calcPrint.textContent
+                .replace(`${ev.textContent}`, ""));
 
-            calcPrint.textContent = (num2 * num1) / 100;
+            calcPrint.textContent = numPrint = (num2 * num1) / 100;
             if (calcPrint.textContent === "NaN") {
                 calcPrint.textContent = num1 / 100;
+            }
+
+            calcPrintMini.textContent = calcPrintMini.textContent
+                .replace(num2, numPrint)
+
+            if (calcPrintMini.textContent.split("%").length - 1) {
+                calcPrintMini.textContent = calcPrintMini.textContent.slice(0, -1);
             }
             printNaN();
         }
@@ -183,11 +249,21 @@ calcBtn.forEach(function (ev) {
         // action CE
         if (ev.classList.contains("action-10")) {
             calcPrint.textContent = "";
+            calcPrintMini.textContent = "";
         }
 
         // point limit
         if (calcPrint.textContent.split(".").length - 1 > 1) {
             calcPrint.textContent = calcPrint.textContent.slice(0, -1);
+            calcPrintMini.textContent = calcPrintMini.textContent.slice(0, -1);
+        }
+        if (calcPrintMini.textContent.split("=").length - 1 > 0 ||
+            calcPrintMini.textContent.split("*").length - 1 > 1 ||
+            calcPrintMini.textContent.split("/").length - 1 > 1) {
+            calcPrintMini.textContent = calcPrintMini.textContent.slice(0, -1);
+        }
+        if(ev.textContent == ".") {
+            console.log("ttt")
         }
 
         function printNaN() {
@@ -195,6 +271,7 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent = 0;
             }
         }
+        console.log(num1, num2)
     });
 });
 

@@ -116,13 +116,23 @@ img {
     display: flex;
     align-items: center;
     border-radius: 5px;
-    padding: 0 5px;
+    padding: 5px 5px 0;
     overflow: auto;
     font-size: 12px;
     height: 40px;
     max-width: 100%;
     border: 1px solid rgb(245,139,255);
     background: linear-gradient(135deg, rgba(255,239,250,1) 50%, rgba(255,255,255,1) 57%, rgba(253,240,255,1) 64%);
+}
+
+.calculator__print-mini {
+    position: absolute;
+    top: 7%;
+    left: 8%;
+    z-index: 1;
+    font-size: 12px;
+    font-size: 8px;
+    color: #818181;
 }
 
 .calculator__btn {
