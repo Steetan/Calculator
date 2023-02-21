@@ -14,7 +14,6 @@ let num2 = "";
 let num3 = ""
 let action = "";
 let numPrint
-let num2Print
 
 calcPrint.textContent = "";
 
@@ -53,10 +52,14 @@ calcBtn.forEach(function (ev) {
             calcPrint.textContent = "";
         }
 
+        calcPrint.textContent = calcPrint.textContent.replace("=", "")
         //action + - * /
         if (ev.classList.contains("action-2")) {
             num2 = parseFloat(calcPrint.textContent.replace("=", ""));
-            calcPrint.textContent = "";
+            if(action == "" && num2 == "") {
+                num1 = calcPrint.textContent
+                calcPrint.textContent = num1
+            }
             switch (action) {
                 case "+":
                     if(num1 != "" && num2 != "") {
@@ -108,6 +111,7 @@ calcBtn.forEach(function (ev) {
                     }
                     break;
             }
+
         }
 
         //action C
@@ -117,6 +121,7 @@ calcBtn.forEach(function (ev) {
             num1 = "";
             num2 = "";
             result = "";
+            action = ""
         }
 
         //NaN and Infinity
@@ -142,14 +147,15 @@ calcBtn.forEach(function (ev) {
             numPrint = ""
             numPrint = calcPrintMini.textContent.replace(`${num3}`, `√(${num3})`)
             if (numPrint.split("√").length - 1) {
-                numPrint = numPrint.slice(0, -1);
+                numPrint = numPrint.slice(0, -2);
             }
-            if (numPrint == `√(${num3})`) {
+            if (numPrint == `√(${num3})^2`) {
                 calcPrintMini.textContent = numPrint
             } 
             else if (numPrint !== `√(${num3})`) {
-                calcPrintMini.textContent = numPrint.replace(numPrint, `√(${numPrint})`)
+                calcPrintMini.textContent = numPrint.replace(numPrint, `√(${num3})`)
             }
+            calcPrintMini.textContent = calcPrintMini.textContent.replace("(NaN)", "(0)")
             printNaN();
         }
 
@@ -195,6 +201,7 @@ calcBtn.forEach(function (ev) {
             else if (numPrint !== `(${num3})^2`) {
                 calcPrintMini.textContent = numPrint.replace(numPrint, `(${num3})^2`)
             }
+            calcPrintMini.textContent = calcPrintMini.textContent.replace("NaN", "0")
             printNaN(); 
         }
 
@@ -209,9 +216,6 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent = "The divisor cannot be zero";
             }
 
-            num2Print = num3
-            console.log(num2Print)
-
             numPrint = ""
             numPrint = calcPrintMini.textContent.replace(`${num3}`, `1/(${num3})`)
             if (numPrint.split("1/x").length - 1) {
@@ -224,6 +228,7 @@ calcBtn.forEach(function (ev) {
                 calcPrintMini.textContent = numPrint.replace(numPrint, `1/(${num3})`)
             }   
 
+            calcPrintMini.textContent = calcPrintMini.textContent.replace("NaN", "0")
             printNaN();
         }
 
@@ -237,8 +242,8 @@ calcBtn.forEach(function (ev) {
                 calcPrint.textContent = num1 / 100;
             }
 
-            calcPrintMini.textContent = calcPrintMini.textContent
-                .replace(num2, numPrint)
+                calcPrintMini.textContent = calcPrintMini.textContent
+                    .replace(`${action}${num2}`, `${action}${numPrint}`)
 
             if (calcPrintMini.textContent.split("%").length - 1) {
                 calcPrintMini.textContent = calcPrintMini.textContent.slice(0, -1);
@@ -262,16 +267,12 @@ calcBtn.forEach(function (ev) {
             calcPrintMini.textContent.split("/").length - 1 > 1) {
             calcPrintMini.textContent = calcPrintMini.textContent.slice(0, -1);
         }
-        if(ev.textContent == ".") {
-            console.log("ttt")
-        }
 
         function printNaN() {
             if (calcPrint.textContent === "NaN") {
                 calcPrint.textContent = 0;
             }
         }
-        console.log(num1, num2)
     });
 });
 
